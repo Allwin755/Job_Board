@@ -21,10 +21,7 @@ Follow the steps below to set up and run the Flask Job Board API on your local m
 ### 1. Install Required Packages
 Make sure Python is installed, then run:
 
-bash
-Copy
-Edit
-pip install -r requirements.txt
+```pip install -r requirements.txt```
 This installs all necessary dependencies such as:
 
 Flask
@@ -50,36 +47,22 @@ Execute all commands to create the user database and users/jobs tables.
 
 Or via terminal:
 
-bash
-Copy
-Edit
-mysql -u root -p < schema.sql
+```mysql -u root -p < schema.sql```
 Make sure to update app.py with your MySQL credentials:
 
-python
-Copy
-Edit
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:YourPassword@localhost/user'
+```app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:YourPassword@localhost/user'```
 For example:
 
-python
-Copy
-Edit
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:Allwin%40123@localhost/user'
+```app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:Allwin%40123@localhost/user'```
 (Note: @ in password is encoded as %40)
 
 ### 3. Run the Flask Application
-bash
-Copy
-Edit
+
 python app.py
 
 The app will run on:
 
-cpp
-Copy
-Edit
-http://127.0.0.1:5000/
+```http://127.0.0.1:5000/```
 
 ### 4. Test with Postman
 Use Postman to test the following endpoints:
@@ -100,48 +83,44 @@ Ensure you are logged in to access protected endpoints.
 
 # List of endpoints with sample requests
 ## Authentication
-◉ POST /register
+◉ POST `/register`
+
 Register a new user.
 
 Sample Request (JSON):
 
-json
-Copy
-Edit
 {
   "username": "john",
   "password": "securepass123"
 }
 
-◉ POST /login
+◉ POST `/login`
+
 Log in an existing user.
 
 Sample Request:
 
-json
-Copy
-Edit
 {
   "username": "john",
   "password": "securepass123"
 }
 
-◉ POST /logout
+◉ POST `/logout`
+
 Logout the current user (requires login).
 
-◉ GET /dashboard
+◉ GET `/dashboard`
+
 Access the user dashboard (requires login).
 
 ## Jobs
 
-◉ POST /jobs
+◉ POST `/jobs`
+
 Create a new job post (requires login).
 
 Sample Request:
 
-json
-Copy
-Edit
 {
   "title": "Backend Developer",
   "company_name": "TechCorp",
@@ -152,26 +131,27 @@ Edit
   "reference": "TC2025"
 }
 
-◉ GET /jobs
+◉ GET `/jobs`
+
 View all jobs (with optional pagination).
 Example: /jobs?page=1
 
-◉ GET /jobs/<id>
+◉ GET `/jobs/<id>`
+
 View details of a specific job.
 Example: /jobs/2
 
-◉ PUT /jobs/<id>
+◉ PUT `/jobs/<id>`
+
 Update a job (must be the job owner).
 Sample Request:
 
-json
-Copy
-Edit
 {
   "location": "Hybrid - Bangalore"
 }
 
-◉ DELETE /jobs/<id>
+◉ DELETE `/jobs/<id>`
+
 Delete a job (must be the job owner).
 
 #  Example User Credentials
