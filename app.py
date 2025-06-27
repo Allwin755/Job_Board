@@ -23,19 +23,24 @@ def load_user(user_id):
 def register():
     data = request.get_json()
     username = data.get("username")
+    email = data.get("email")
     password = data.get("password")
 
-    if not username or not password:
-        return jsonify({"error": "Username and password required"}), 400
+    if not username or not email or not password:
+        return jsonify({"error": "Username, email, and password required"}), 400
 
     if User.query.filter_by(username=username).first():
         return jsonify({"error": "Username already exists"}), 409
 
+    if User.query.filter_by(email=email).first():
+        return jsonify({"error": "Email already exists"}), 409
+
     hashed_pw = generate_password_hash(password)
-    user = User(username=username, password=hashed_pw)
+    user = User(username=username, email=email, password=hashed_pw)
     db.session.add(user)
     db.session.commit()
     return jsonify({"message": "User registered"}), 201
+
 
 @app.route("/login", methods=["POST"])
 def login():
