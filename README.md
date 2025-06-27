@@ -22,6 +22,7 @@ Follow the steps below to set up and run the Flask Job Board API on your local m
 Make sure Python is installed, then run:
 
 ```pip install -r requirements.txt```
+
 This installs all necessary dependencies such as:
 
 Flask
@@ -48,12 +49,15 @@ Execute all commands to create the user database and users/jobs tables.
 Or via terminal:
 
 ```mysql -u root -p < schema.sql```
+
 Make sure to update app.py with your MySQL credentials:
 
 ```app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:YourPassword@localhost/user'```
+
 For example:
 
 ```app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:Allwin%40123@localhost/user'```
+
 (Note: @ in password is encoded as %40)
 
 ### 3. Run the Flask Application
