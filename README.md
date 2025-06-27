@@ -73,6 +73,7 @@ bash
 Copy
 Edit
 python app.py
+
 The app will run on:
 
 cpp
@@ -111,6 +112,7 @@ Edit
   "username": "john",
   "password": "securepass123"
 }
+
 ◉ POST /login
 Log in an existing user.
 
@@ -123,6 +125,7 @@ Edit
   "username": "john",
   "password": "securepass123"
 }
+
 ◉ POST /logout
 Logout the current user (requires login).
 
@@ -148,6 +151,7 @@ Edit
   "skills": "Python, Flask, SQL",
   "reference": "TC2025"
 }
+
 ◉ GET /jobs
 View all jobs (with optional pagination).
 Example: /jobs?page=1
@@ -166,6 +170,7 @@ Edit
 {
   "location": "Hybrid - Bangalore"
 }
+
 ◉ DELETE /jobs/<id>
 Delete a job (must be the job owner).
 
