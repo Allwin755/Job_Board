@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Job Listings{% endblock %}
+{% block content %}
+<h2>Job Listings</h2>
+{% for job in jobs %}
+    <div style="border:1px solid #ccc; padding:10px; margin:10px 0;">
+        <strong>{{ job.title }}</strong> at {{ job.company_name }}<br>
+        {{ job.location }} - {{ job.job_type }}<br>
+        <a href="{{ url_for('jobs.view_job', id=job.id) }}">View</a>
+        {% if current_user.is_authenticated and current_user.id == job.user_id %}
+            | <a href="{{ url_for('jobs.edit_job', id=job.id) }}">Edit</a>
+            | 
+            <form action="{{ url_for('jobs.delete_job', id=job.id) }}" method="post" style="display:inline;">
+                <button type="submit" onclick="return confirm('Delete this job?')">Delete</button>
+            </form>
+        {% endif %}
+    </div>
+{% endfor %}
+<div>
+    {% if page > 1 %}
+        <a href="{{ url_for('jobs.list_jobs', page=page-1) }}">Previous</a>
+    {% endif %}
+    {% if total > page * per_page %}
+        <a href="{{ url_for('jobs.list_jobs', page=page+1) }}">Next</a>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Create Job{% endblock %}
+{% block content %}
+<h2>Post a New Job</h2>
+<form method="post">
+    Title: <input name="title" required><br>
+    Company: <input name="company_name" required><br>
+    Location: <input name="location" required><br>
+    Job Type: <input name="job_type" required><br>
+    Description: <textarea name="description"></textarea><br>
+    Skills: <input name="skills"><br>
+    Reference Code: <input name="reference" required><br>
+    <button type="submit">Create Job</button>
+</form>
+{% endblock %}
+

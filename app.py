@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, render_template,redirect, url_for
 from flask_login import LoginManager, login_user, login_required, logout_user, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
 from models import db, User
@@ -19,50 +19,58 @@ app.register_blueprint(jobs_bp)
 def load_user(user_id):
     return User.query.get(int(user_id))
 
-@app.route("/register", methods=["POST"])
+@app.route("/")
+def home():
+    return render_template("home.html")
+
+@app.route("/register", methods=["GET", "POST"])
 def register():
-    data = request.get_json()
-    username = data.get("username")
-    email = data.get("email")
-    password = data.get("password")
+    if request.method == "POST":
+        data = request.form
+        username = data.get("username")
+        email = data.get("email")
+        password = data.get("password")
 
-    if not username or not email or not password:
-        return jsonify({"error": "Username, email, and password required"}), 400
+        if not username or not email or not password:
+            return "All fields required", 400
 
-    if User.query.filter_by(username=username).first():
-        return jsonify({"error": "Username already exists"}), 409
+        if User.query.filter_by(username=username).first():
+            return "Username already exists", 409
 
-    if User.query.filter_by(email=email).first():
-        return jsonify({"error": "Email already exists"}), 409
+        hashed_pw = generate_password_hash(password)
+        user = User(username=username, email=email, password=hashed_pw)
+        db.session.add(user)
+        db.session.commit()
+        return redirect(url_for("login"))
 
-    hashed_pw = generate_password_hash(password)
-    user = User(username=username, email=email, password=hashed_pw)
-    db.session.add(user)
-    db.session.commit()
-    return jsonify({"message": "User registered"}), 201
+    return render_template("register.html")
 
-
-@app.route("/login", methods=["POST"])
+@app.route("/login", methods=["GET", "POST"])
 def login():
-    data = request.get_json()
-    username = data.get("username")
-    password = data.get("password")
-    user = User.query.filter_by(username=username).first()
-    if user and check_password_hash(user.password, password):
-        login_user(user)
-        return jsonify({"message": "Login successful"}), 200
-    return jsonify({"error": "Invalid credentials"}), 401
+    if request.method == "POST":
+        data = request.form
+        username = data.get("username")
+        password = data.get("password")
+        user = User.query.filter_by(username=username).first()
+        if user and check_password_hash(user.password, password):
+            login_user(user)
+            return redirect(url_for("dashboard"))
+        return "Invalid credentials", 401
 
-@app.route("/dashboard", methods=["GET"])
+    return render_template("login.html")
+
+
+@app.route("/dashboard")
 @login_required
 def dashboard():
-    return jsonify({"message": f"Welcome, {current_user.username}!"}), 200
+    return render_template("dashboard.html")
 
 @app.route("/logout", methods=["POST"])
 @login_required
 def logout():
     logout_user()
-    return jsonify({"message": "Logged out"}), 200
+    return redirect(url_for("login"))
+
 
 if __name__ == "__main__":
     app.run(debug=True)
