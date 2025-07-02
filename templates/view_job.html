@@ -8,5 +8,6 @@
 <p><strong>Description:</strong> {{ job.description }}</p>
 <p><strong>Skills:</strong> {{ job.skills }}</p>
 <p><strong>Reference:</strong> {{ job.reference }}</p>
+<p><strong>Created at:</strong> {{ job.date_created }}</p>
 <a href="{{ url_for('jobs.list_jobs') }}">Back to Jobs</a>
 {% endblock %}
