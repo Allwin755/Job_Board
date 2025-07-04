@@ -1,6 +1,38 @@
 {% extends "base.html" %}
 {% block title %}Home{% endblock %}
+
 {% block content %}
-<h1>Welcome to the Job Board</h1>
-<p>Please click above to login or register.</p>
+<style>
+  .top-message {
+    text-align: center;
+    margin-top: 20px;
+    font-weight: bold;
+  }
+
+  .center-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 40px;
+    text-align: center;
+  }
+
+  .center-content img {
+    width: 150px;
+    border-radius: 50%;
+    border: 3px solid black;
+    margin-bottom: 20px;
+  }
+</style>
+
+<div class="top-message">
+  <p>Please click above to login or register.</p>
+</div>
+
+<div class="center-content">
+  <img src="{{ url_for('static', filename='image/job_image.jpg') }}" alt="Job Image">
+  <h1>Welcome to the Job Board</h1>
+</div>
 {% endblock %}
+

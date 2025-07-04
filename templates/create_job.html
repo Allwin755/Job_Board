@@ -1,16 +1,93 @@
 {% extends "base.html" %}
 {% block title %}Create Job{% endblock %}
 {% block content %}
-<h2>Post a New Job</h2>
-<form method="post">
-    Title: <input name="title" required><br>
-    Company: <input name="company_name" required><br>
-    Location: <input name="location" required><br>
-    Job Type: <input name="job_type" required><br>
-    Description: <textarea name="description"></textarea><br>
-    Skills: <input name="skills"><br>
-    Reference Code: <input name="reference" required><br>
-    <button type="submit">Create Job</button>
-</form>
-{% endblock %}
+<style>
+  .form-container {
+    width: 400px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #f9fbfd;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+  }
 
+  .form-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .form-group {
+    margin-bottom: 15px;
+  }
+
+  .form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+
+  .form-group input,
+  .form-group textarea {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+  }
+
+  .form-container button {
+    width: 100%;
+    background-color: #007bff;
+    color: white;
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  .form-container button:hover {
+    background-color: #0056b3;
+  }
+</style>
+
+<div class="form-container">
+  <h2>Post a New Job</h2>
+  <form method="post">
+    <div class="form-group">
+      <label>Title:</label>
+      <input name="title" required>
+    </div>
+
+    <div class="form-group">
+      <label>Company:</label>
+      <input name="company_name" required>
+    </div>
+
+    <div class="form-group">
+      <label>Location:</label>
+      <input name="location" required>
+    </div>
+
+    <div class="form-group">
+      <label>Job Type:</label>
+      <input name="job_type" required>
+    </div>
+
+    <div class="form-group">
+      <label>Description:</label>
+      <textarea name="description" rows="4"></textarea>
+    </div>
+
+    <div class="form-group">
+      <label>Skills:</label>
+      <input name="skills">
+    </div>
+
+    <div class="form-group">
+      <label>Reference Code:</label>
+      <input name="reference" required>
+    </div>
+
+    <button type="submit">Create Job</button>
+  </form>
+</div>
+{% endblock %}

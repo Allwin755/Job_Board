@@ -1,6 +1,15 @@
 {% extends "base.html" %}
 {% block title %}Job Listings{% endblock %}
 {% block content %}
+<style>
+    .center-content {
+    display: flex; 
+    align-items: center;
+    justify-content: center;
+    margin-top: 40px;
+    text-align: center;
+  }
+</style>
 <h2>Job Listings</h2>
 {% for job in jobs %}
     <div style="border:1px solid #ccc; padding:10px; margin:10px 0;">
@@ -18,10 +27,10 @@
 {% endfor %}
 <div>
     {% if page > 1 %}
-        <a href="{{ url_for('jobs.list_jobs', page=page-1) }}">Previous</a>
+        <a class="center-content" href="{{ url_for('jobs.list_jobs', page=page-1) }}">&lt;&lt;Previous</a>
     {% endif %}
     {% if total > page * per_page %}
-        <a href="{{ url_for('jobs.list_jobs', page=page+1) }}">Next</a>
+        <a class="center-content" href="{{ url_for('jobs.list_jobs', page=page+1) }}">Next&gt;&gt;</a>
     {% endif %}
 </div>
 {% endblock %}
