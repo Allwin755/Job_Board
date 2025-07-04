@@ -164,5 +164,6 @@ Use the following credentials to test login and protected endpoints (e.g., /dash
 
 - Username: testuser  
 - Password: testpass123
+- Email: testuser@example.com
 
 (You can create this user by sending a POST request to /register with the above details.)
