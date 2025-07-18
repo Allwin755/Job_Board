@@ -21,9 +21,9 @@ document.addEventListener("DOMContentLoaded", function () {
             });
 
             const data = await response.json();
-            appendMessage("Bot", data.reply);
+            appendMessage("ALLW-E", data.reply);
         } catch (err) {
-            appendMessage("Bot", "Oops! Something went wrong.");
+            appendMessage("ALLW-E", "Oops! Something went wrong.");
         }
     });
 
