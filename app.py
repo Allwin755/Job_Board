@@ -1,10 +1,13 @@
-from flask import Flask, request, render_template,redirect, url_for
+from flask import Flask, request, render_template,redirect, url_for, jsonify
 from flask_login import LoginManager, login_user, login_required, logout_user, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
+from flask_cors import CORS
+from chatbot_engine import get_chatbot_response  
 from models import db, User
 from jobs import jobs_bp
 
 app = Flask(__name__)
+CORS(app)  
 app.config['SECRET_KEY'] = 'your_secret'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:Allwin%40123@localhost/user'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -71,6 +74,11 @@ def logout():
     logout_user()
     return redirect(url_for("login"))
 
+@app.route("/chat", methods=["POST"])#the change
+def chat():
+    user_msg = request.json.get("message")
+    response = get_chatbot_response(user_msg)
+    return jsonify({"reply": response})
 
 if __name__ == "__main__":
     app.run(debug=True)

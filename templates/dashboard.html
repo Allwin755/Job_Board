@@ -19,7 +19,7 @@
 
   .button-linkgreen {
     display: inline-block;
-    background-color: #00ff99;
+    background-color: #0dcde7;
     color: white;
     padding: 10px 20px;
     text-decoration: none;
@@ -28,7 +28,7 @@
   }
 
   .button-linkgreen:hover {
-    background-color: #00cc7a;
+    background-color: #017a9c;
   }
 
   .button-linkorange {
@@ -45,6 +45,7 @@
     background-color: #cc7a00;
   }
 </style>
+
 <div class="center-content">
   <h2>Welcome, {{ current_user.username }}</h2>
 
@@ -53,4 +54,17 @@
     <a class="button-linkorange" href="/jobs">View Job Listings</a>
   </div>
 </div>
+
+<div class="chatbot-container">
+  <div class="chatbot-header">Need Help?</div>
+  <div id="chatbox-container">
+    <div id="chat-messages"></div>
+  </div>
+  <form id="chat-form">
+    <input type="text" id="chat-input" placeholder="Ask something...">
+    <button type="submit">Send</button>
+  </form>
+</div>
+
+<script src="{{ url_for('static', filename='js/chatbot.js') }}"></script>
 {% endblock %}
